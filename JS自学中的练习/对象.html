@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>对象</title>
+	<link rel="stylesheet" href="">
+</head>
+
+<body>
+	<script type="text/javascript">
+		var MrLiuShuai = {
+			name: "LiuShuai",
+			age: 22,
+			sex: "male",
+			health: 100,
+			somke: function () {
+				console.log("i am somking!");
+				this.health--;
+			},
+			ball: function () {
+				console.log("i am playing ball");
+				this.health++;
+			}
+		}
+
+		MrLiuShuai.apet = "计算机系"; //添加属性
+		console.log(MrLiuShuai.sex); //查看属性
+		MrLiuShuai.age = 21; //修改属性
+		delete MrLiuShuai.sex; //删除属性
+		//当一个对象的属性没声明就访问，会返回undefined
+	</script>
+
+	<script type="text/javascript">
+		//对象的创建方法
+		//1、var obj = {}	plainObject	对象字面量/对象直接量
+		//2、构造函数
+		//	1）系统自带的构造函数	Object()
+		//	2）自定义的
+
+
+		//系统自带的构造函数
+		//var obj = new Object();//<==>var obj = {};
+
+		//构造函数的命名规则    大驼峰式命名规则	TheFirstName 
+		//函数命名规则	小驼峰式命名规则	theFirstName
+
+		function Car(color) {
+			this.color = color;
+			this.name = "BMW";
+			this.height = "1400";
+			this.lang = "4900";
+			this.weight = 1000;
+			this.health = 100;
+			this.run = function () {
+			this.health--;
+			}
+		}
+		var car = new Car("red");
+		var car1 = new Car("yellow");
+	</script>
+
+
+	<script>
+		//构造函数内部原理（new）
+		//1、在函数体最前面隐式的加上this = {}
+		//2、执行 this.xxx = xxx;
+		//3、隐式的返回this
+		function Person(name, height) {
+			//var this = {}
+			this.name = name;
+			this.height = height;
+			this.say = function () {
+				console.log(this.say);
+			  }
+			  return 123;//除了对象类型，返回其他任何类型都会转化成对象类型
+			  //return {};
+			  //return this;
+		}
+
+		var person = new Person('xiaowang', 180);
+		var person1 = new Person('xiaoliu', 175);
+
+	</script>
+</body>
+
+</html>

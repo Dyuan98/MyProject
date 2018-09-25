@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>包装类</title>
+</head>
+
+<body>
+
+    <script>
+        var num = 123; //原始值，不可能有属性和方法  属性和方法只有对象能有（对象包括对象自己，数组，function）
+        var num1 = new Number(123);
+        num1.abc = 'a'; //在运算之后变成数字
+        var str = new String('abcd');
+        var bol = new Boolean('true');
+        //undefined和null不能有属性
+
+        //原始值不能操作属性，只能通过包装类操作
+        var str = 'abcd';
+        str.length = 2;
+        //new String('abcd').length = 2;   delete
+        console.log(str);
+    </script>
+
+    <script>
+        var str = "abc";
+        str += 1; //'abc1'
+        var test = typeof (str); //test = "String"
+        if (test.length == 6) {
+            test.sign = "typeof的返回结果可能为String";
+            //new String(test).sign = 'xxx'    调用包装类赋值给原始值
+        }
+        //new String(test).sign  没有赋值
+        console.log(test.sign);
+    </script>
+
+    <script>
+        var a = 5;
+
+        function test() {
+            a = 0;
+            console.log(a);
+            console.log(this.a); //this指向window，除非是new出来的，this才指向新的对象
+            var a;
+            console.log(a);
+        }
+        //test(); //0、5、0
+        //new test(); //0、undefined、0
+    </script>
+
+    <script>
+        function employee(name, code) {
+            this.name = "wangli"; //name参数没有赋值给this.name
+            this.code = "A001"; //code参数没有赋值给this.code
+        }
+        var newemp = new employee("zhangping", "A002");
+        document.write("雇员姓名：" + newemp.name + "<br>");
+        document.write("雇员代号：" + newemp.code + "<br>");
+    </script>
+
+
+    <script>
+        function foo(x) {
+            console.log(arguments);
+        }
+        foo(1, 2, 3, 4, 5);
+    </script>
+    <script>
+    function b(x, y, a) {
+        // arguments[2] = 10;//  a = 10
+        // alert(a);
+        a = 10;
+        alert(arguments[2]);
+      }
+      b(1, 2, 3);
+    
+    </script>
+</body>
+
+</html>

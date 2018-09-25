@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>原型</title>
+</head>
+
+<body>
+
+    <p>原型是function对象的一个属性，原型定义了构造函数制造出的对象的公共祖先。通过该构造函数产生的对象， 可以继承该原型的属性和方法。原型也是对象。
+    </p>
+    <script>
+        Person.prototype //原型
+        //Person.prototype = {} 它就是祖先  是一个对象
+        Person.prototype.LastName = "Liu";
+        Person.prototype.say = function () {
+            console.log('hehe');
+        }
+
+        function Person(name, age, sex) {
+            this.name = name;
+            this.age = age;
+            this.sex = sex;
+        }
+        //person和person1都继承了Person的LastName的属性
+        //原型是person和person1的公有祖先
+        var person = new Person("zhangsan", 20, "male");
+    </script>
+
+    <script>
+        //提取公有属性
+        //原型的增删改查
+        Car.prototype = {
+            height: 1400,
+            lang: 4900,
+            carName: "BMW"
+        }
+
+        function Car(color, owner) {
+            this.owner = owner;
+            this.color = color;
+            //下面三个属性在每次执行时都要执行，造成代码的冗余，通过继承解决(放到原型中)
+            // this.height = 1400;
+            // this.lang = 4900;
+            // this.carName = "BMW";
+        }
+        var car = new Car("red", "Liu");
+        var car1 = new Car("yellow", "Wang");
+    </script>
+
+    <script>
+        function Add() {}
+        var a = new Add();
+        //a.contructor 构造器
+    </script>
+
+    <script>
+        //__proto__属性   __proto__里面放的原型   __proto__可被修改
+        People.prototype.name = "abc";
+
+        function People() {
+            // //1、var this = {
+            //     __proto__ : Person.prototype
+            // };
+        }
+        var people = new People();
+
+        //如果我要访问person.name，它会先在自身的属性中找有没有name属性，如果没有，
+        //它就会沿着__proto__的指向，到Person.prototype里面去找
+    </script>
+
+    <script>
+        Person.prototype.name = "sunny";
+        function Person() {
+            //var this = {__proto__ : Person.prototype}
+        }
+        var person = new Person();
+        Person.prototype = {
+            name: "cherry"
+        }
+    </script>
+
+</body>
+
+</html>

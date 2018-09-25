@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>作用域</title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	
+	<script type="text/javascript">
+		//函数的属性    [[scope]]  == 域，里面存的是函数的作用域 ，隐式的属性
+		//执行期上下文 --> AO||GO，函数的每次执行都会产生一个执行期上下文，函数执行完毕后，执行期上下文销毁
+		//作用域链       [[scope]]中所储存的执行期上下文对象的集合，呈链式链接
+		
+
+
+		function a () {
+			function b() }{
+				var b = 234;
+			}
+			var a = 123;
+			b();
+		}
+		var glob = 100;
+		a();
+
+		//a函数被定义：a.[[scope]] --> 0 : GO{}
+		//a函数执行：a.[[scope]] --> 0 : AO{}
+		//			         1 : GO{}
+		//b函数被定义：b的[[scope]]就是a的[[scope]]
+		//b函数执行： b产生一个AO{} 放在作用域链的顶端
+		//			        0 : b.AO{}
+		//			        1 : a.AO{}
+		//			        2 : a.GO{}		    	
+	</script>
+
+
+	<script type="text/javascript">
+		function a () {
+			function b () {
+				function c () {
+				}
+				c ();
+			}
+			b();
+		}
+		a ();
+
+
+		// a函数被定义：a.[[scope]] --> 0 : GO
+
+		// a函数执行：    a.[[scope]] --> 0 : a.AO 		a函数执行完，销毁a.AO，再次执行a函数，new a.AO
+		// 			              1 :  GO
+
+		// b函数被定义：b.[[scope]] --> 0 : a.AO
+		// 			               1 : GO
+
+		// b函数执行：     b.[[scope]] --> 0 : b.AO	b函数执行完，销毁b.AO，再次执行b函数，new b.AO
+		// 			                1 : a.AO
+		// 			                2 : GO
+
+		// c函数被定义： c[[scope]] --> 0 : b.AO		
+		// 			              1 : a.AO
+		// 			              2 : GO
+
+		// c函数执行：    c[[scope]] -->0 : c.AO		c函数执行完，销毁c.AO，再次执行c函数，new c.AO
+		// 			            1 : b.AO
+		// 			            2 : a.AO
+		// 			            3 : GO					           		 
+
+		//按顺序访问
+		// 外面的函数无法访问里面的函数，里面的函数可以访问外面的函数
+		
+
+	</script>
+
+</body>
+</html>

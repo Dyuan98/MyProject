@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>函数</title>
+	<link rel="stylesheet" href="">
+</head>
+
+<body>
+	<script type="text/javascript">
+	//函数声明
+	//function test() {}
+	//函数表达式（匿名函数表达式）
+	//var demo = function () {}
+	//求和任意个数的数
+	//不定参  arguments是一个存放实参的数组
+	//
+	//
+	//累加
+	function sum() {
+		var result = 0;
+		for (var i = 0; i < arguments.length; i++) {
+			result += arguments[i];
+		}
+		console.log(result);
+		return; //1、终止函数 2、返回值
+	}
+	sum(1, 2, 3, 4, 5, 6, 7, 8, 9);
+	</script>
+	<script type="text/javascript">
+	//switch练习
+	function call(animal) {
+		switch (animal) {
+			case "dog":
+				console.log("汪汪汪");
+				break;
+			case "cat":
+				console.log("喵喵喵");
+				break;
+			case "cow":
+				console.log("哞哞哞");
+				break;
+		}
+	}
+	var n = window.prompt("输入一个小动物")
+	call(n);
+	</script>
+	<script type="text/javascript">
+	//递归求阶乘
+	function factorial(number) {
+		if (number == 0 || number == 1) {
+			return 1;
+		} else {
+			return number * factorial(number - 1);
+		}
+	}
+	</script>
+	<script type="text/javascript">
+		//斐波那契额数列——递归
+	function list(number) {
+		if (number == 1 || number == 2) {
+			return 1;
+		} else {
+			return list(n - 1) + list(n - 2);
+		}
+	}
+	</script>
+
+	<script type="text/javascript">
+		//输入一个数，逆向并用汉字输出
+	function reverse() {
+		var num = window.prompt("输入一个数字");
+		var str = "";
+		for (var i = num.length - 1; i >= 0; i--) {
+			str += transfer(num[i]);
+		}
+		console.log(str);
+	}
+	function transfer(target) {
+		switch (target) {
+			case "1":
+				return "一";
+			case "2":
+				return "二";
+			case "3":
+				return "三";
+			case "4":
+				return "四";
+			case "5":
+				return "五";
+			case "6":
+				return "六";
+			case "7":
+				return "七";
+			case "8":
+				return "八";
+			case "9":
+				return "九";
+		}
+	}
+	reverse();
+	</script>
+</body>
+
+</html>

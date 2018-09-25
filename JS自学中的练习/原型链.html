@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>原型链</title>
+</head>
+
+<body>
+    <script>
+        //构成原型链
+        Grand.prototype.lastName = 'Liu';
+
+        function Grand() {
+
+        }
+        var grand = new Grand();
+
+        Father.prototype = grand;
+
+        function Father() {
+            this.name = 'shuai';
+        }
+        var father = new Father();
+
+        Son.prototype = father;
+
+        function Son() {
+            this.habbit = 'somke';
+        }
+        var son = new Son();
+    </script>
+
+    <script>
+        //a.sayName()
+        //sayName里面的this指向是，谁调用的这个方法，this指向谁
+        Person.prototype = {
+            name: 'a',
+            sayName: function () {
+                console.log(this.name);
+            }
+        }
+
+        function Person() {
+            this.name = 'b';
+        }
+
+        var person = new Person();
+    </script>
+
+    <script>
+        //var obj = {} <==> var obj1 = new Object();
+        //  推荐                不推荐
+
+        // var obj = Object.create(原型);
+        //创建对象的方法
+        var obj = {
+            name: "sunny",
+            age: 20
+        };
+        var obj1 = Object.create(obj);
+
+        //绝大多数对象的最终都会继承自Obj
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>call\apply</title>
+</head>
+
+<body>
+    <script>
+        //call和apply的作用：改变this的指向
+        function Person(name, age) {
+            //this == obj
+            this.name = name; //this.name = name ==>obj.name = name
+            this.age = age; //this.age = age ==>obj.age = age
+        }
+        var person = new Person('liu', 20);
+        var obj = {};
+        Person.call(obj, "wang", 22); //call的第一个参数会改变this的指向，第二位以后的参数当作实参传递到形参去
+        //把obj传到this去了，执行时this变成了obj
+        //函数的执行：test() ——> test.call()
+    </script>
+
+    <script>
+        //借用别人的函数，实现自己的功能
+        function Person(name, age, sex) {
+            this.name = name;
+            this.age = age;
+            this.sex = sex;
+        }
+
+        function Student(name, age, sex, tel, grade) {
+            //var this = {} 这里的this和call的第一个this是同一个this
+            Person.call(this, name, age, sex);
+            this.tel = tel;
+            this.grade = grade;
+        }
+
+        var student = new Student('sunny', 123, 'male', 139, 2015);
+    </script>
+
+    <script>
+        function Wheel(wheelSize, style) {
+            this.wheelSize = wheelSize;
+            this.style = style;
+        }
+
+        function Sit(c, sitColor) {
+            this.c = c;
+            this.sitColor = sitColor;
+        }
+
+        function Model(height, width, len) {
+            this.height = height;
+            this.width = width;
+            this.len = len;
+        }
+
+        function Car(wheelSize, style, c, sitColor, height, width, len) {
+            //利用其他的函数实现功能
+            Wheel.call(this, wheelSize, style);
+            Sit.call(this, c, sitColor);
+            Model.call(this, height, width, len)
+        }
+        var car = new Car(100, "花哨", "真皮", "red", 1800, 1900, 4900);
+    </script>
+
+
+    <script>
+    //作用：改变this指向
+    //区别 传参列表不同
+    //call 需要把实参按照形参的个数传进去
+    //apply 需要传一个arguments（数组的形式）——实参列表
+    //其他方面没有任何区别
+
+    
+    </script>
+
+</body>
+
+</html>

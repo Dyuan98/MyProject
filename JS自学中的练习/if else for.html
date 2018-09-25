@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>if else for</title>
+	<link rel="stylesheet" href="">
+</head>
+
+<body>
+	<script type="text/javascript">
+	var n = parseInt(window.prompt('计算2的N次幂'));
+	var count = 1;
+	if (n == 0) {
+		console.log(count);
+	} else {
+		for (var i = 1; i <= n; i++) {
+			count *= 2;
+		}
+		console.log(count);
+	}
+	</script>
+	<script type="text/javascript">
+	var n = parseInt(window.prompt('计算n的阶乘'));
+	var count = 1;
+	if (n == 0) {
+		console.log(count);
+	} else {
+		for (n; n > 0; n--) {
+			count *= n;
+		}
+		console.log(count);
+	}
+	</script>
+	<script type="text/javascript">
+	var n = parseInt(window.prompt('斐波那契额数列'));
+	var first = 1,
+		second = 1,
+		third;
+
+	if (n == 1 || n == 2) {
+		console.log("1");
+	} else if (n >= 3) {
+		for (var i = 0; i < n - 2; i++) {
+			third = first + second;
+			first = second;
+			second = third;
+		}
+		console.log(third);
+	}
+	</script>
+	<script type="text/javascript">
+	var n = parseInt(window.prompt('反向输出'));
+	var a, b;
+	var x, y, z;
+	//存余数
+	a = n % 100;
+	b = n % 10;
+
+	x = (n - a) / 100; //取原数的百位
+	y = (n - b) / 10 - x * 10; //取原数的十位
+	z = n - (x * 100) - (y * 10); //取原数的个位
+	console.log(b);
+	console.log(y);
+	console.log(x);
+	</script>
+	<script type="text/javascript">
+		//比较三个数的大小
+	var n1 = parseInt(window.prompt('输入第一个数'));
+	var n2 = parseInt(window.prompt('输入第二个数'));
+	var n3 = parseInt(window.prompt('输入第三个数'));
+	if (n1 > n2) {
+		if (n1 > n3) {
+			console.log(n1);
+		} else {
+			console.log(n3);
+		}
+	} else if (n1 < n2) {
+		if (n2 < n3) {
+			console.log(n3);
+		} else {
+			console.log(n2);
+		}
+	}
+	</script>
+</body>
+
+</html>

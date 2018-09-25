@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>闭包 立即执行函数</title>
+	<link rel="stylesheet" href="">
+</head>
+
+<body>
+	<script type="text/javascript">
+	//当内部函数被保存到外部时，将会生成闭包。
+	//闭包会导致原有的作用域链不被释放，造成内存泄漏。
+	function a() {
+		var num = 100;
+
+		function b() {
+			num++;
+			console.log(num);
+		}
+		return b;
+	}
+
+	var demo = a();
+	demo(); //101
+	demo(); //102
+	</script>
+	<script type="text/javascript">
+	//闭包的作用：实现公有变量（函数累加器）
+	function add() {
+		var count = 0;
+		function demo() {
+			count++;
+			console.log(count);
+		}
+		return demo;
+	}
+	var counter = add();
+	counter();
+	counter();
+	// ...
+	// ...
+	// ...
+	// 执行几次，就进行几次的累加。
+	</script>
+	<script type="text/javascript">
+	//闭包的作用：可以做缓存（存储结构）
+	//eater
+	function eater() {
+		var food = "";
+		var obj = {
+			eat: function() {
+				console.log("i am eating " + food);
+				food = "";
+			},
+			push: function(myFood) {
+				food = myFood;
+			}
+		}
+		return obj; //返回了eat和push，都和eater形成了闭包
+	}
+
+	var eater1 = eater();
+	eater1.push('banana');
+	eater1.eat();
+	</script>
+	<script type="text/javascript">
+	//作用：可以实现封装，属性私有化
+	//Person();
+	//模块化开发，防止污染全局变量
+	</script>
+	<script type="text/javascript">
+	//立即执行函数   防止浪费空间，执行一次就立即释放
+	//针对初始化功能的函数
+	var num = (function(a, b) {//返回的值给了num
+		var c = a + b;
+		return c;
+	}(1, 2));
+
+
+	//(function () {} {});//建议第一种
+	//(function () {})();//两种形式
+	</script>
+	<script type="text/javascript">
+	//只有表达式才能被执行符号执行*****
+	function test() {
+		var a = 123;
+		console.log(a);
+	} //函数声明，所以他不能被执行符号执行
+	test();
+
+	var test = function() {
+		console.log('a');
+	}(); //函数表达式，可以被执行符号执行
+	//被执行符号执行的表达式，会自动忽略函数的名称。
+	//只要能变成表达式，就能被执行符号执行
+	</script>
+	<script type="text/javascript">
+	//闭包
+	function test() {
+		var arr = []; //arr数组里存储了10个函数
+		for (var i = 0; i < 10; i++) {
+			arr[i] = function() {
+				document.write(i + " "); //赋值语句，这个函数在这里不会执行，只有在执行函数的时候才会看函数内部的内容
+			}
+		}
+		return arr;
+	}
+
+	var myArr = test();
+	for (var j = 0; j < 10; j++) {
+		myArr[j](); //在这里执行 arr[i] = function() { document.write (i + " ");}，执行的时候去判断i的值
+	}
+	</script>
+	<script type="text/javascript">
+	//上面的问题通过立即执行函数解决办法
+	function test() {
+		var arr = [];
+		for (var i = 0; i < 10; i++) {
+			(function(j) {
+				arr[j] = function() {
+					document.write(j + " ");
+				}
+			}(i));
+		}
+		return arr;
+	}
+	var myArr = test();
+	for (var j = 0; j < 10; j++) {
+		myArr[j]();
+	}
+	</script>
+
+	<script type="text/javascript">
+		//逗号(,)操作符，(2, 3)先看前面的表达式，如果前面的表达式需要计算的先计算，然后再计算后面的表达式，如果后面的表达式需要计算的话，就计算后面的表达式，都计算完之后，把后面的表达式的计算结果返回回去。
+		var f = (
+		    function f() {
+		    	return "1";
+		    },
+		    function g() {
+		    	return 2;
+		    }
+		)();
+		console.log(typeof f);
+
+	</script>
+</body>
+
+</html>

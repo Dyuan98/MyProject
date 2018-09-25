@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>test--预编译</title>
+	<link rel="stylesheet" href="">
+</head>
+
+<body>
+	<script type="text/javascript">
+	function bar() {
+		return foo; //直接返回，后面的赋值语句不执行
+		foo = 10;
+
+		function foo() {
+
+		}
+		var foo = 11;
+	}
+	console.log(bar()); //
+
+	/*AO {
+		bar : undefined --> function foo () { ....} 
+	}*/
+	</script>
+	<script type="text/javascript">
+	console.log(bar());
+
+	function bar() {
+		foo = 10;
+
+		function foo() {}
+		var foo = 11;
+		return foo;
+	}
+	/*AO {
+		bar : undefined --> 10 --> function foo () {...} --> 11
+	}*/
+	</script>
+	<script type="text/javascript">
+	a = 100;
+	function demo(e) {
+		function e () {}
+		arguments[0] = 2;
+		console.log(e);//2
+		if (a) {//a = undefined   不执行  //if 里面不允许声明function
+			var b = 123;
+
+			function c() {
+			}
+		}
+		var c;
+		a = 10;
+		var a;
+		console.log(b);//undefined
+		f = 123;
+		console.log(c);//undefined
+		console.log(a);//10
+	}
+	var a ;
+	demo(1);
+
+	console.log(a);//100   这里的a是全局变量
+	console.log(f);//123
+
+	/*GO {
+		a : undefined --> 100 
+		demo : undefined --> function () {}
+		f :undefined --> 123
+	}
+
+	AO {
+		e : undefined --> 1 -->function e () {} --> 2
+		c : undefined 
+		b : undefined 
+		a : undefined --> 10 
+	}*/
+	</script>
+
+<script>
+        var x = 1,
+            y = z = 0;
+
+        function add(n) {
+            return n = n + 1;
+        }
+        //预编译提升
+        y = add(x);
+
+        function add(n) {
+            return n = n + 3;
+        }//预编译提升覆盖上面的add函数
+        z = add(x);
+
+        console.log(x);
+        console.log(y);
+        console.log(z);
+    </script>
+</body>
+
+</html>

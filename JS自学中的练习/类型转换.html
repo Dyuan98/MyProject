@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>类型转换</title>
+	<link rel="stylesheet" href="">
+</head>
+
+<body>
+	<script type="text/javascript">
+	for (var i = 0; i <= 100; i++) {
+		if (i % 5 == 0 || i % 10 == 7) {
+			continue;//终止本次循环，进行下一个循环
+		}
+		console.log(i);
+	}
+	</script>
+		<script type="text/javascript">
+	document.write("强制类型转换");
+	//Number  把对象转化成数字
+	//String与Number与Boolean相似
+	var demo1 = "123";
+	var num1 = Number(demo1);
+	console.log(typeof(num1) + " : " + num1);
+	//parseInt 
+	//第一个作用： 把对象转化成整型数字
+	demo2 = "123.33";
+	var num2 = parseInt(demo2);
+	console.log(typeof(num2) + " : " + num2);
+	//第二个作用：有两个参数的时候，以目标进制（第二个参数）为基底，转化成10进制。
+	var demo3 = "10";
+	var num3 = parseInt(demo3,16);//把10当作16进制的数转化成10进制的数
+	console.log(typeof(num3)+" : "+num3);
+	//parseFloat
+	//与parseInt很相似，只有一个参数
+	//
+	//toString
+	var demo = 123;//null和undefined不能用toString
+	var num = demo.toString();
+	console.log(typeof(num)+" :  "+num);
+	</script>
+
+	<script type="text/javascript">
+	console.log(isNaN(null)); //调用Number转化成数字再判断
+	var a = "abc";
+	a++; //调用Number转化成数字
+	console.log(typeof(a) + " : " + a);
+	//+/-同理
+	//加号“+”调用的是String 转化成字符串
+	
+	</script>
+
+	<script type="text/javascript">
+		//===绝对等于  !==绝对不等于      不发生类型转化
+	</script>
+
+ 	
+ 	
+ </body>
+
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>闭包</title>
+	<link rel="stylesheet" href="">
+</head>
+
+<body>
+	<script type="text/javascript">
+		//两个或多个函数互相嵌套，把里面的函数保存到了外面函数的外部，形成闭包。
+		//让里面的函数保存到全局——闭包的效果
+		function test() {
+			var temp = 100;
+
+			function a() {
+				console.log(temp);
+			}
+			return a;
+		}
+		var demo = test(); //返回的function a 给了demo
+		demo();
+	</script>
+	<script type="text/javascript">
+		var demo;
+
+		function test() {
+			var a1 = 100;
+
+			function a() {
+				console.log(a1);
+			}
+			demo = a;
+		}
+		test();
+	</script>
+	<script type="text/javascript">
+		//计算一个字符串的字节长度
+		function retBytelen(target) {
+			var count = 0;
+			for (var i = 0; i < target.length; i++) {
+				if (target.charCodeAt(i) <= 255)
+					count++;
+				else if (target.charCodeAt(i) > 255)
+					count += 2;
+			}
+			console.log(count);
+		}
+		retBytelen("qwert哈哈哈");
+	</script>
+	<script type="text/javascript">
+		//计算一个字符串的字节长度 ——简化版
+		function retBytelen(target) {
+			var count,
+				len;
+			count = len = target.length;
+			for (var i = 0; i < len; i++) {
+				if (target.charCodeAt(i) > 255)
+					count++;
+			}
+			console.log(count);
+		}
+		retBytelen("qwert哈哈哈");
+	</script>
+
+	<script>
+		//闭包
+		function Person(name, age, sex) {
+			var a = 0;
+			this.name = name;
+			this, age = age;
+			this.sex = sex;
+
+			function sss() {
+				a++;
+				console.log(a); //1
+			}
+			this.say = sss;
+		}
+		var oPerson = new Person();
+		oPerson.say(); //1
+		oPerson.say(); //2
+		var oPerson1 = new Person();
+		oPerson1.say(); //1
+	</script>
+</body>
+
+</html>
